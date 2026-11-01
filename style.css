@@ -1,0 +1,121 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #eef2f0;
+  --surface: #ffffff;
+  --ink: #1b2a27;
+  --muted: #5d6e6a;
+  --line: #d5dedb;
+  --green: #1f5c4b;
+  --green-dark: #164538;
+  --brass: #9a6b12;
+  --brass-bg: #f6ecd6;
+  --ok-bg: #dcefe6;
+  --danger: #a3302a;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Header ---------- */
+.site-header { background: var(--green); color: #fff; padding: 28px 0; }
+.site-header .wrap { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+h1, h2 { font-family: "Newsreader", Georgia, serif; font-weight: 600; margin: 0; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.35rem; margin-bottom: 14px; }
+.stats { margin: 0; opacity: .9; font-size: .95rem; }
+
+/* ---------- Panels ---------- */
+main { padding-top: 24px; padding-bottom: 48px; }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+
+/* ---------- Form ---------- */
+.add-form { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 14px; align-items: end; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: .9rem; font-weight: 500; }
+input {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+}
+input:focus-visible, .btn:focus-visible { outline: 3px solid #7fb9a5; outline-offset: 1px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: .88rem;
+  padding: 9px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--green);
+  background: #fff;
+  color: var(--green);
+  cursor: pointer;
+}
+.btn:hover { background: var(--ok-bg); }
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:hover { background: var(--green-dark); }
+.btn-danger { border-color: var(--danger); color: var(--danger); }
+.btn-danger:hover { background: #f8e3e1; }
+
+/* ---------- Catalog ---------- */
+.catalog-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.catalog-head h2 { margin: 0; }
+.catalog-head input { max-width: 320px; }
+
+.catalog { width: 100%; border-collapse: collapse; }
+.catalog th { text-align: left; font-size: .85rem; color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 2px solid var(--line); }
+.catalog td { padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.catalog td.title { font-weight: 600; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .82rem; font-weight: 600; }
+.badge.available { background: var(--ok-bg); color: var(--green-dark); }
+.badge.issued { background: var(--brass-bg); color: var(--brass); }
+
+.empty { text-align: center; color: var(--muted); padding: 24px 0 8px; margin: 0; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 24px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: #fff;
+  padding: 10px 18px; border-radius: 6px; font-size: .92rem;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: var(--danger); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
+  .add-form { grid-template-columns: 1fr; }
+
+  /* Turn each table row into a stacked card */
+  .catalog thead { display: none; }
+  .catalog, .catalog tbody, .catalog tr, .catalog td { display: block; width: 100%; }
+  .catalog tr { border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 12px; }
+  .catalog td { border: 0; padding: 4px 0; }
+  .catalog td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); font-size: .85rem; }
+  .catalog td.title { font-size: 1.05rem; }
+  .actions { margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }

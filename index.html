@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>Town Library</h1>
+      <p class="stats" id="stats" aria-live="polite"></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Add book -->
+    <section class="panel" aria-labelledby="add-title">
+      <h2 id="add-title">Add a book</h2>
+      <form id="add-form" class="add-form">
+        <label>Title
+          <input type="text" id="title" required placeholder="e.g. Godaan">
+        </label>
+        <label>Author
+          <input type="text" id="author" required placeholder="e.g. Premchand">
+        </label>
+        <label>Genre
+          <input type="text" id="genre" required placeholder="e.g. Fiction">
+        </label>
+        <button type="submit" class="btn btn-primary">Add book</button>
+      </form>
+    </section>
+
+    <!-- Catalog -->
+    <section class="panel" aria-labelledby="catalog-title">
+      <div class="catalog-head">
+        <h2 id="catalog-title">Catalog</h2>
+        <input type="search" id="search" placeholder="Search by title or author" aria-label="Search books">
+      </div>
+
+      <table class="catalog">
+        <thead>
+          <tr><th>Title</th><th>Author</th><th>Genre</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="book-list"></tbody>
+      </table>
+      <p id="empty" class="empty" hidden>No books found. Try a different search or add a book above.</p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
